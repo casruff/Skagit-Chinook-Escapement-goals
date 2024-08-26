@@ -27,8 +27,8 @@ if(file.exists("cnt_time.txt")) {
   file.remove("cnt_time.txt")
 }
 
-mod_names <- data.frame(mod = rep(c("Beverton-Holt", "Beverton-Holt"), 1),
-                        error = rep(c("MA1 & AR1", "AR1"), 1))
+# mod_names <- data.frame(mod = rep(c("Beverton-Holt", "Beverton-Holt"), 1),
+#                         error = rep(c("MA1 & AR1", "AR1"), 1))
 ```
 
 # Requirements

@@ -1,6 +1,6 @@
 ---
 title: Appendix S2. Summarize S/R model results and compute management reference points
-subtitle:  2021 Skagit River Spring Chinook RER.
+subtitle:  2021 Skagit River Spring Chinook Escapement goal estimation.
 output:
   pdf_document:
     highlight: haddock
@@ -356,6 +356,8 @@ for(i in 1:mcmc) {
   }
 }
 OYP <- OYP/mcmc
+
+cbind(SS,OYP)
 
 
 ## Prob of overfishing

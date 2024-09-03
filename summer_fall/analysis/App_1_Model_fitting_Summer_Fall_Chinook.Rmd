@@ -27,8 +27,8 @@ if(file.exists("cnt_time.txt")) {
   file.remove("cnt_time.txt")
 }
 
-mod_names <- data.frame(mod = rep(c("Beverton-Holt", "Beverton-Holt"), 1),
-                        error = rep(c("MA1 & AR1", "AR1"), 1))
+# mod_names <- data.frame(mod = rep(c("Beverton-Holt", "Beverton-Holt"), 1),
+#                         error = rep(c("MA1 & AR1", "AR1"), 1))
 ```
 
 # Requirements
@@ -483,8 +483,7 @@ Next we specify the names of three necessary data files containing the following
 ```{r get_filenames}
 ## 1. file with escapement data
 ## [n_yrs x 2] matrix of obs counts; 1st col is calendar yr
-fn_esc <- paste("skagit","_",run,"_","esc.csv",sep = "")
-paste("skagit","_",run,"_","esc.csv",sep = "")
+fn_esc <- paste("skagit","_",run,"_","esc_new.csv",sep = "")
 ## 2. file with age comp data
 ## [n_yrs x (1+A)]; 1st col is calendar yr
 fn_age <- paste("skagit","_",run,"_","age.csv",sep = "")

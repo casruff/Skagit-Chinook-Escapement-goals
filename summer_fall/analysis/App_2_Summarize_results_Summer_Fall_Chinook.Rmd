@@ -1,6 +1,6 @@
 ---
 title: Appendix S2. Summarize S/R model results and compute management reference points
-subtitle: 2021 Skagit River Summer/Fall Chinook RER
+subtitle: 2021 Skagit River Summer/Fall escapement goal estimation
 output:
   pdf_document:
     highlight: haddock
@@ -149,7 +149,7 @@ model <- as.matrix(mod_fits[[1]])
 
 ```{r get_escapement_data}
 ## escapement
-dat_esc <- read_csv(file.path(datadir, paste("skagit","_",run,"_","esc",".csv",sep = "")))
+dat_esc <- read_csv(file.path(datadir, paste("skagit","_",run,"_","esc_new",".csv",sep = "")))
 ## log of escapement
 ln_dat_esc <- c(log(dat_esc$escapement), rep(NA, n_fore))
 ```
@@ -194,7 +194,7 @@ print(tbl_smry,digits=3,quote=FALSE,justify="right")
 
 ### Spawner-recruit relationship
 
-Here is the relationship between spawner and subsequent recruits (a), assuming mean values for all covariates. Gray lines show 100 plausible spawner recruit relationships derived from posterior distributions for a and b parameters. Note that for plotting purposes only in (b) and (c), the density in the largest bin for each parameter contains counts for all values greater or equal to that.Vertical arrows under the x-axes in (b) and (c) indicate the 2.5^th^, 50^th^, and 97.5^th^ percentiles.
+Here is the relatonship between spawner and subsequent recruits (a), assuming mean values for all covariates. Gray lines show 100 plausible spawner recruit relationships derived from posterior distributions for a and b parameters. Note that for plotting purposes only in (b) and (c), the density in the largest bin for each parameter contains counts for all values greater or equal to that.Vertical arrows under the x-axes in (b) and (c) indicate the 2.5^th^, 50^th^, and 97.5^th^ percentiles.
 
 ```{r plot_S_R, fig.width=8, fig.height=5, fig.pos="placeHere"}
 layout(matrix(c(1,1,2,3),2,2),c(3,2),c(1,1))
@@ -579,4 +579,5 @@ lines(t_idx_a, pDat[2,], col="blue3", lwd=2)
 text(x=par()$usr[1]+par()$pin[2]/par()$pin[1]*offSet*diff(par()$usr[1:2]),
      y=par()$usr[4]-offSet*diff(par()$usr[3:4]),"(d)")
 ```
+
 

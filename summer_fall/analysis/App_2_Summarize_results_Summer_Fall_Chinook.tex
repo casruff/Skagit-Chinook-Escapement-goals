@@ -106,7 +106,7 @@ reference points}
   \apptocmd{\@title}{\par {\large #1 \par}}{}{}
 }
 \makeatother
-\subtitle{2021 Skagit River Summer/Fall Chinook RER}
+\subtitle{2021 Skagit River Summer/Fall escapement goal estimation}
 \author{}
 \date{\vspace{-2.5em}}
 
@@ -119,7 +119,7 @@ reference points}
 }
 \vspace{0.2in}
 
-This is version 0.24.08.23.
+This is version 0.24.09.03.
 
 \hypertarget{background}{%
 \section{Background}\label{background}}
@@ -231,7 +231,7 @@ model, as well as the covariates and harvest data and escapement data.
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{## escapement}
-\NormalTok{dat_esc <-}\StringTok{ }\KeywordTok{read_csv}\NormalTok{(}\KeywordTok{file.path}\NormalTok{(datadir, }\KeywordTok{paste}\NormalTok{(}\StringTok{"skagit"}\NormalTok{,}\StringTok{"_"}\NormalTok{,run,}\StringTok{"_"}\NormalTok{,}\StringTok{"esc"}\NormalTok{,}\StringTok{".csv"}\NormalTok{,}\DataTypeTok{sep =} \StringTok{""}\NormalTok{)))}
+\NormalTok{dat_esc <-}\StringTok{ }\KeywordTok{read_csv}\NormalTok{(}\KeywordTok{file.path}\NormalTok{(datadir, }\KeywordTok{paste}\NormalTok{(}\StringTok{"skagit"}\NormalTok{,}\StringTok{"_"}\NormalTok{,run,}\StringTok{"_"}\NormalTok{,}\StringTok{"esc_new"}\NormalTok{,}\StringTok{".csv"}\NormalTok{,}\DataTypeTok{sep =} \StringTok{""}\NormalTok{)))}
 \CommentTok{## log of escapement}
 \NormalTok{ln_dat_esc <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\KeywordTok{log}\NormalTok{(dat_esc}\OperatorTok{$}\NormalTok{escapement), }\KeywordTok{rep}\NormalTok{(}\OtherTok{NA}\NormalTok{, n_fore))}
 \end{Highlighting}
@@ -266,12 +266,12 @@ the estimated parameters.
 ## Potential scale reduction factors:
 ## 
 ##           Point est. Upper C.I.
-## alpha              1       1.01
+## alpha              1       1.00
 ## beta               1       1.00
 ## sigma_r            1       1.00
 ## sigma_s            1       1.00
 ## pi_tau             1       1.00
-## pi_eta[1]          1       1.00
+## pi_eta[1]          1       1.01
 ## pi_eta[2]          1       1.00
 ## pi_eta[3]          1       1.00
 ## 
@@ -300,16 +300,16 @@ Here is a table of summary statistics for some of the model parameters.
 
 \begin{verbatim}
 ##       alpha E_Rkr_a     beta
-## 2.5%   2.41   0.948 2.70e-05
-## 50%    4.09   1.481 7.53e-05
-## 97.5%  7.44   2.093 1.31e-04
+## 2.5%   2.32   0.907 2.34e-05
+## 50%    4.10   1.483 7.22e-05
+## 97.5%  7.22   2.068 1.24e-04
 \end{verbatim}
 
 \hypertarget{spawner-recruit-relationship}{%
 \subsubsection{Spawner-recruit
 relationship}\label{spawner-recruit-relationship}}
 
-Here is the relationship between spawner and subsequent recruits (a),
+Here is the relatonship between spawner and subsequent recruits (a),
 assuming mean values for all covariates. Gray lines show 100 plausible
 spawner recruit relationships derived from posterior distributions for a
 and b parameters. Note that for plotting purposes only in (b) and (c),
@@ -335,8 +335,9 @@ all values greater or equal to that.Vertical arrows under the x-axes in
 \CommentTok{## posterior of spawners}
 
 \NormalTok{sDat <-}\StringTok{ }\KeywordTok{apply}\NormalTok{(model[,}\KeywordTok{grep}\NormalTok{(}\StringTok{"Sp"}\NormalTok{,}\KeywordTok{colnames}\NormalTok{(model))],}\DecValTok{2}\NormalTok{,quantile,CI_vec)}
-\NormalTok{sDat <-}\StringTok{ }\NormalTok{sDat[,}\DecValTok{1}\OperatorTok{:}\NormalTok{(n_yrs}\OperatorTok{-}\NormalTok{age_min)]}
 \KeywordTok{write.csv}\NormalTok{(}\KeywordTok{t}\NormalTok{((sDat)),}\KeywordTok{file.path}\NormalTok{(savedir,}\StringTok{"sf_adults_spawners.csv"}\NormalTok{))}
+
+\NormalTok{sDat <-}\StringTok{ }\NormalTok{sDat[,}\DecValTok{1}\OperatorTok{:}\NormalTok{(n_yrs}\OperatorTok{-}\NormalTok{age_min)]}
 
 \CommentTok{## posterior of recruits}
 \NormalTok{rDat <-}\StringTok{ }\KeywordTok{exp}\NormalTok{(}\KeywordTok{apply}\NormalTok{(model[,}\KeywordTok{grep}\NormalTok{(}\StringTok{"tot_ln_Rec"}\NormalTok{,}\KeywordTok{colnames}\NormalTok{(model))],}\DecValTok{2}\NormalTok{,quantile,CI_vec))}
@@ -570,9 +571,9 @@ Here is a summary of estimated reference points
 
 \begin{verbatim}
 ##         MSY  Smsy  Umsy  Umax   Seq Scrit
-## 2.5%   7973  5542 0.414 0.585 15197   760
-## 50%   11719  7844 0.590 0.755 19881   994
-## 97.5% 18139 15508 0.741 0.866 36387  1819
+## 2.5%   8139  5721 0.399 0.568 15493   775
+## 50%   12193  8201 0.590 0.756 20699  1035
+## 97.5% 19270 17433 0.736 0.862 39974  1999
 \end{verbatim}
 
 \hypertarget{total-population-size}{%
